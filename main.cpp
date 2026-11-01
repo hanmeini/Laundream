@@ -1,235 +1,237 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
-#include <limits>
 
 using namespace std;
 
-// ============================================================================
-// KONSTANTA & DATA GLOBAL (Array & Variabel Dasar)
-// Penanggung Jawab: Tim Laundream
-// ============================================================================
-const int JUMLAH_LAYANAN = 2;
-const string NAMA_LAYANAN[JUMLAH_LAYANAN] = {"Reguler", "Ekspres"};
-const int TARIF_LAYANAN[JUMLAH_LAYANAN] = {7000, 10000};
-
-// ============================================================================
-// MODUL 1: MENU UTAMA & NAVIGASI
-// Penanggung Jawab: AHMAD RAIHAN KHOMEINI SAPUTRA (2604130073) - Ketua
-// Deskripsi: Menampilkan header program, opsi menu, dan mengarahkan navigasi.
-// ============================================================================
-void tampilkanMenuUtama() {
-    cout << "\n====================================\n";
-    cout << "       LAUNDREAM - MENU UTAMA       \n";
-    cout << "====================================\n";
-    cout << "1. Transaksi Laundry\n";
-    cout << "2. Lihat Tarif Layanan\n";
-    cout << "3. Keluar\n";
-    cout << "====================================\n";
-    cout << "Pilih menu: ";
-}
-
-// ============================================================================
-// MODUL 3A: KATALOG TARIF LAYANAN
-// Penanggung Jawab: AULIA ARI FADHILAH (2604130139)
-// Deskripsi: Menampilkan informasi jenis layanan dan tarif dari Array.
-// ============================================================================
-void tampilkanDaftarTarif() {
-    cout << "\n====================================\n";
-    cout << "       DAFTAR TARIF LAYANAN         \n";
-    cout << "====================================\n";
-    for (int i = 0; i < JUMLAH_LAYANAN; i++) {
-        cout << (i + 1) << ". Layanan " << NAMA_LAYANAN[i] 
-             << " : Rp" << TARIF_LAYANAN[i] << " / kg\n";
-    }
-    cout << "------------------------------------\n";
-    cout << "* Diskon 10% untuk cucian minimal 5 kg!\n";
-    cout << "====================================\n";
-}
-
-// ============================================================================
-// MODUL 2: INPUT DATA PELANGGAN & PILIHAN LAYANAN
-// Penanggung Jawab: MUHAMMAD DIENAN AKBAR (2604130112)
-// Deskripsi: Menerima input nama pelanggan, pilihan jenis layanan, dan berat.
-// ============================================================================
-void inputDataPelanggan(string &nama, int &pilihanLayanan, double &berat) {
-    cout << "\n====================================\n";
-    cout << "       LAUNDREAM - TRANSAKSI        \n";
-    cout << "====================================\n";
-    
-    // Input Nama Pelanggan
-    cout << "Masukkan nama pelanggan : ";
-    getline(cin >> ws, nama);
-
-    // Pilihan Layanan
-    cout << "\nPilih jenis layanan:\n";
-    for (int i = 0; i < JUMLAH_LAYANAN; i++) {
-        cout << (i + 1) << ". " << NAMA_LAYANAN[i] << " - Rp" << TARIF_LAYANAN[i] << "/kg\n";
-    }
-    
-    // Loop validasi pilihan layanan
-    do {
-        cout << "Pilih layanan (1-" << JUMLAH_LAYANAN << ") : ";
-        if (!(cin >> pilihanLayanan) || pilihanLayanan < 1 || pilihanLayanan > JUMLAH_LAYANAN) {
-            cout << "[!] Pilihan tidak valid. Silakan coba lagi.\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            pilihanLayanan = 0;
-        }
-    } while (pilihanLayanan < 1 || pilihanLayanan > JUMLAH_LAYANAN);
-
-    // Input Berat Pakaian
-    do {
-        cout << "Masukkan berat pakaian (kg) : ";
-        if (!(cin >> berat) || berat <= 0) {
-            cout << "[!] Berat pakaian harus berupa angka positif. Silakan ulangi.\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            berat = 0;
-        }
-    } while (berat <= 0);
-}
-
-// ============================================================================
-// MODUL 3B: PERHITUNGAN BIAYA DASAR LAUNDRY
-// Penanggung Jawab: AULIA ARI FADHILAH (2604130139)
-// Deskripsi: Menghitung biaya laundry sebelum diskon (berat * tarif).
-// ============================================================================
-double hitungBiayaLaundry(double berat, int tarifPerKg) {
-    return berat * tarifPerKg;
-}
-
-// ============================================================================
-// MODUL 4: LOGIKA DISKON & TOTAL PEMBAYARAN
-// Penanggung Jawab: SALWA THALITA AZAHRA (2604130033)
-// Deskripsi: Menerapkan percabangan if-else untuk menghitung potongan diskon 10%
-//            dan menghitung total akhir yang harus dibayarkan.
-// ============================================================================
-double hitungDiskon(double berat, double biayaLaundry) {
-    // Ketentuan: Diskon 10% jika berat pakaian >= 5 kg
-    if (berat >= 5.0) {
-        return biayaLaundry * 0.10;
-    } else {
-        return 0.0;
-    }
-}
-
-double hitungTotalBayar(double biayaLaundry, double diskon) {
-    return biayaLaundry - diskon;
-}
-
-// ============================================================================
-// MODUL 5: TAMPILAN RINGKASAN TRANSAKSI (STRUK) & PERULANGAN
-// Penanggung Jawab: MUHAMMAD FAKHRY ABYAN (2604130074)
-// Deskripsi: Menampilkan struk transaksi yang rapi dan mengelola konfirmasi ulang.
-// ============================================================================
-void tampilkanRingkasanTransaksi(const string &nama, const string &jenisLayanan, 
-                                double berat, int tarif, double subtotal, 
-                                double diskon, double total) {
-    cout << "\n====================================\n";
-    cout << "        RINGKASAN TRANSAKSI         \n";
-    cout << "====================================\n";
-    cout << left << setw(18) << "Nama pelanggan" << ": " << nama << "\n";
-    cout << left << setw(18) << "Jenis layanan"  << ": " << jenisLayanan << "\n";
-    cout << left << setw(18) << "Berat pakaian"  << ": " << berat << " kg\n";
-    cout << left << setw(18) << "Tarif per kg"   << ": Rp" << tarif << "\n";
-    cout << left << setw(18) << "Biaya laundry"  << ": Rp" << fixed << setprecision(0) << subtotal << "\n";
-    cout << left << setw(18) << "Diskon"         << ": Rp" << diskon;
-    if (diskon > 0) {
-        cout << " (10%)";
-    }
-    cout << "\n";
-    cout << "------------------------------------\n";
-    cout << left << setw(18) << "Total bayar"    << ": Rp" << total << "\n";
-    cout << "====================================\n";
-}
-
-bool konfirmasiKembali() {
-    char pilihan;
-    cout << "\nKembali ke menu utama? (y/n): ";
-    cin >> pilihan;
-    return (pilihan == 'y' || pilihan == 'Y');
-}
-
-// ============================================================================
-// MODUL 6: INTEGRASI, QUALITY ASSURANCE & MAIN FUNCTION
-// Penanggung Jawab: ATHAUFA KINDI WIRATAMA (2604130114) & AHMAD RAIHAN (Ketua)
-// Deskripsi: Mengintegrasikan seluruh fungsi ke alur eksekusi utama program.
-// ============================================================================
 int main() {
+    // ========================================================================
+    // BLOK 1: DEKLARASI ARRAY TARIF & RIWAYAT TRANSAKSI
+    // Penanggung Jawab: AULIA ARI FADHILAH (2604130139)
+    // Konsep C++: Array 1 Dimensi & Variabel
+    // ========================================================================
+    const int JUMLAH_LAYANAN = 2;
+    string namaLayanan[JUMLAH_LAYANAN] = {"Reguler", "Ekspres"};
+    int tarifLayanan[JUMLAH_LAYANAN] = {7000, 10000};
+
+    // Array untuk menyimpan riwayat transaksi harian (Kapasitas maks 50 transaksi)
+    const int MAX_TRANSAKSI = 50;
+    string riwayatNama[MAX_TRANSAKSI];
+    string riwayatLayanan[MAX_TRANSAKSI];
+    double riwayatBerat[MAX_TRANSAKSI];
+    int riwayatTotal[MAX_TRANSAKSI];
+
+    // Variabel akumulasi rekap
+    int jumlahTransaksi = 0;
+    int totalPendapatan = 0;
+    double totalKgLaundry = 0.0;
+
+    // Variabel umum navigasi
     int pilihanMenu = 0;
-    bool programBerjalan = true;
+    char lanjutMenu = 'y';
 
     cout << "==================================================\n";
     cout << "     SELAMAT DATANG DI APLIKASI LAUNDREAM         \n";
     cout << "  Sistem Penghitungan Biaya Laundry Berbasis C++  \n";
     cout << "==================================================\n";
 
-    while (programBerjalan) {
-        tampilkanMenuUtama();
-        
-        if (!(cin >> pilihanMenu)) {
-            cout << "\n[!] Masukan tidak valid. Silakan masukkan angka menu!\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            continue;
-        }
+    // ========================================================================
+    // BLOK 2: PERULANGAN PROGRAM UTAMA & MENU UTAMA
+    // Penanggung Jawab: AHMAD RAIHAN KHOMEINI SAPUTRA (2604130073) - Ketua
+    // Konsep C++: Perulangan do-while & Percabangan switch-case
+    // ========================================================================
+    do {
+        cout << "\n====================================\n";
+        cout << "       LAUNDREAM - MENU UTAMA       \n";
+        cout << "====================================\n";
+        cout << "1. Transaksi Laundry Baru\n";
+        cout << "2. Rekap Laporan Penjualan\n";
+        cout << "3. Lihat Tarif Layanan\n";
+        cout << "4. Keluar\n";
+        cout << "====================================\n";
+        cout << "Pilih menu (1-4): ";
+        cin >> pilihanMenu;
 
         switch (pilihanMenu) {
             case 1: {
-                // Modul 2: Input Data
+                // ============================================================
+                // BLOK 3: INPUT DATA TRANSAKSI
+                // Penanggung Jawab: MUHAMMAD DIENAN AKBAR (2604130112)
+                // Konsep C++: Input/Output (cin, getline)
+                // ============================================================
                 string namaPelanggan;
                 int pilihanLayanan = 0;
                 double beratPakaian = 0.0;
 
-                inputDataPelanggan(namaPelanggan, pilihanLayanan, beratPakaian);
+                cout << "\n====================================\n";
+                cout << "       LAUNDREAM - TRANSAKSI        \n";
+                cout << "====================================\n";
 
-                // Modul 3: Ambil tarif & hitung subtotal
+                // Input Nama
+                cout << "Masukkan nama pelanggan : ";
+                cin.ignore();
+                getline(cin, namaPelanggan);
+
+                // Input Layanan
+                cout << "\nPilih jenis layanan:\n";
+                for (int i = 0; i < JUMLAH_LAYANAN; i++) {
+                    cout << (i + 1) << ". " << namaLayanan[i] 
+                         << " - Rp" << tarifLayanan[i] << "/kg\n";
+                }
+                cout << "Pilih layanan (1-2) : ";
+                cin >> pilihanLayanan;
+
+                // Validasi pilihan layanan sederhana
+                while (pilihanLayanan < 1 || pilihanLayanan > JUMLAH_LAYANAN) {
+                    cout << "[!] Pilihan salah. Masukkan nomor layanan (1-2): ";
+                    cin >> pilihanLayanan;
+                }
+
+                // Input Berat
+                cout << "Masukkan berat pakaian (kg) : ";
+                cin >> beratPakaian;
+
+                while (beratPakaian <= 0) {
+                    cout << "[!] Berat tidak valid. Masukkan berat positif (kg): ";
+                    cin >> beratPakaian;
+                }
+
+                // ============================================================
+                // BLOK 4: PERHITUNGAN BIAYA & LOGIKA DISKON
+                // Penanggung Jawab: SALWA THALITA AZAHRA (2604130033)
+                // Konsep C++: Operator Aritmatika & Percabangan if-else
+                // ============================================================
                 int indeksLayanan = pilihanLayanan - 1;
-                string jenisLayananTerpilih = NAMA_LAYANAN[indeksLayanan];
-                int tarifTerpilih = TARIF_LAYANAN[indeksLayanan];
-                double subtotal = hitungBiayaLaundry(beratPakaian, tarifTerpilih);
+                string jenisTerpilih = namaLayanan[indeksLayanan];
+                int tarifPerKg = tarifLayanan[indeksLayanan];
 
-                // Modul 4: Hitung diskon & total
-                double diskon = hitungDiskon(beratPakaian, subtotal);
-                double totalBayar = hitungTotalBayar(subtotal, diskon);
+                // Hitung biaya laundry
+                double subtotal = beratPakaian * tarifPerKg;
+                double diskon = 0.0;
 
-                // Modul 5: Tampilkan struk
-                tampilkanRingkasanTransaksi(namaPelanggan, jenisLayananTerpilih, 
-                                           beratPakaian, tarifTerpilih, 
-                                           subtotal, diskon, totalBayar);
-
-                // Konfirmasi kembali ke menu
-                if (!konfirmasiKembali()) {
-                    programBerjalan = false;
-                    cout << "\nTerima kasih telah menggunakan aplikasi Laundream!\n";
+                // Ketentuan: diskon 10% jika berat >= 5 kg
+                if (beratPakaian >= 5.0) {
+                    diskon = subtotal * 0.10;
+                } else {
+                    diskon = 0.0;
                 }
+
+                double totalBayar = subtotal - diskon;
+
+                // Simpan transaksi ke Array Riwayat (Jika belum penuh)
+                if (jumlahTransaksi < MAX_TRANSAKSI) {
+                    riwayatNama[jumlahTransaksi] = namaPelanggan;
+                    riwayatLayanan[jumlahTransaksi] = jenisTerpilih;
+                    riwayatBerat[jumlahTransaksi] = beratPakaian;
+                    riwayatTotal[jumlahTransaksi] = totalBayar;
+
+                    jumlahTransaksi++;
+                    totalPendapatan = totalPendapatan + totalBayar;
+                    totalKgLaundry = totalKgLaundry + beratPakaian;
+                }
+
+                // ============================================================
+                // BLOK 5: STRUK TRANSAKSI & KONFIRMASI KEMBALI
+                // Penanggung Jawab: MUHAMMAD FAKHRY ABYAN (2604130074)
+                // Konsep C++: Manipulasi Output & Tampilan Struk Rapi
+                // ============================================================
+                cout << "\n====================================\n";
+                cout << "        RINGKASAN TRANSAKSI         \n";
+                cout << "====================================\n";
+                cout << "Nama pelanggan : " << namaPelanggan << "\n";
+                cout << "Jenis layanan  : " << jenisTerpilih << "\n";
+                cout << "Berat pakaian  : " << beratPakaian << " kg\n";
+                cout << "Tarif per kg   : Rp" << tarifPerKg << "\n";
+                cout << "Biaya laundry  : Rp" << (int)subtotal << "\n";
+                cout << "Diskon         : Rp" << (int)diskon;
+                if (diskon > 0) {
+                    cout << " (10%)";
+                }
+                cout << "\n";
+                cout << "------------------------------------\n";
+                cout << "Total bayar    : Rp" << (int)totalBayar << "\n";
+                cout << "====================================\n";
+
+                cout << "\nKembali ke menu utama? (y/n): ";
+                cin >> lanjutMenu;
                 break;
             }
+
             case 2: {
-                // Modul 3A: Tampilkan Daftar Tarif
-                tampilkanDaftarTarif();
-                if (!konfirmasiKembali()) {
-                    programBerjalan = false;
-                    cout << "\nTerima kasih telah menggunakan aplikasi Laundream!\n";
+                // ============================================================
+                // BLOK 6A: REKAP LAPORAN PENJUALAN KASIR
+                // Penanggung Jawab: ATHAUFA KINDI WIRATAMA (2604130114)
+                // Konsep C++: Pembacaan Array dengan Perulangan for
+                // ============================================================
+                cout << "\n======================================================\n";
+                cout << "             REKAP LAPORAN PENJUALAN LAUNDRY          \n";
+                cout << "======================================================\n";
+
+                if (jumlahTransaksi == 0) {
+                    cout << "Belum ada transaksi yang tercatat hari ini.\n";
+                } else {
+                    cout << "No. | Nama Pelanggan   | Layanan  | Berat  | Total Bayar\n";
+                    cout << "------------------------------------------------------\n";
+                    for (int i = 0; i < jumlahTransaksi; i++) {
+                        cout << (i + 1) << "   | " 
+                             << riwayatNama[i] << "\t\t| " 
+                             << riwayatLayanan[i] << "\t | " 
+                             << riwayatBerat[i] << " kg | Rp" 
+                             << riwayatTotal[i] << "\n";
+                    }
+                    cout << "------------------------------------------------------\n";
+                    cout << "Total Transaksi   : " << jumlahTransaksi << " transaksi\n";
+                    cout << "Total Berat Cucian: " << totalKgLaundry << " kg\n";
+                    cout << "Total Pemasukan   : Rp" << totalPendapatan << "\n";
                 }
+                cout << "======================================================\n";
+
+                cout << "\nKembali ke menu utama? (y/n): ";
+                cin >> lanjutMenu;
                 break;
             }
+
             case 3: {
-                // Keluar dari Program
-                programBerjalan = false;
+                // ============================================================
+                // BLOK 6B: TAMPILAN TARIF LAYANAN
+                // Penanggung Jawab: AULIA ARI FADHILAH (2604130139)
+                // Konsep C++: Perulangan for & Array
+                // ============================================================
+                cout << "\n====================================\n";
+                cout << "       DAFTAR TARIF LAYANAN         \n";
+                cout << "====================================\n";
+                for (int i = 0; i < JUMLAH_LAYANAN; i++) {
+                    cout << (i + 1) << ". Layanan " << namaLayanan[i] 
+                         << " : Rp" << tarifLayanan[i] << " / kg\n";
+                }
+                cout << "------------------------------------\n";
+                cout << "* Diskon 10% untuk cucian minimal 5 kg!\n";
+                cout << "====================================\n";
+
+                cout << "\nKembali ke menu utama? (y/n): ";
+                cin >> lanjutMenu;
+                break;
+            }
+
+            case 4: {
                 cout << "\n==================================================\n";
                 cout << " Terima kasih telah menggunakan aplikasi Laundream!\n";
                 cout << "               Sampai jumpa kembali!              \n";
                 cout << "==================================================\n";
+                lanjutMenu = 'n';
                 break;
             }
+
             default: {
-                cout << "\n[!] Menu nomor " << pilihanMenu << " tidak tersedia. Silakan pilih 1 - 3.\n";
+                cout << "\n[!] Menu tidak valid. Silakan pilih nomor 1 sampai 4.\n";
+                cout << "Tekan tombol apa saja lalu enter untuk kembali...";
+                char sembarang;
+                cin >> sembarang;
+                lanjutMenu = 'y';
                 break;
             }
         }
-    }
+
+    } while (lanjutMenu == 'y' || lanjutMenu == 'Y');
 
     return 0;
 }

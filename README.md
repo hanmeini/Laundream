@@ -1,57 +1,63 @@
-# Laundream: Sistem Penghitungan Biaya Laundry Berbasis C++
+# Laundream: Sistem Kasir & Rekap Penghitungan Biaya Laundry (C++)
 
-Program CLI (Command Line Interface) berbasis C++ yang dirancang untuk membantu proses penghitungan biaya pencucian pakaian pada usaha laundry sederhana secara otomatis, akurat, dan transparan.
+Program terminal berbasis C++ untuk membantu proses transaksi kasir laundry, penghitungan tarif & diskon otomatis, serta penyusunan rekapitulasi laporan penjualan harian secara terpadu.
 
-Proyek ini disusun untuk memenuhi tugas akhir mata kuliah **Dasar Pemrograman**, Fakultas Matematika dan Ilmu Pengetahuan Alam, **Universitas Negeri Semarang (UNNES)**.
+Proyek ini disusun untuk memenuhi tugas akhir mata kuliah **Dasar Pemrograman**, Program Studi Pendidikan Matematika / Matematika / Ilmu Komputer, FMIPA **Universitas Negeri Semarang (UNNES)** tahun 2026.
 
 ---
 
-## 👥 Tim Pengembang & Pembagian Tugas
+## 👥 Tim Pengembang & Pembagian Tugas (Murni di dalam `int main()`)
 
-| No | Nama Lengkap | NIM | Peran Utama | Rincian Tanggung Jawab & Bagian Kode |
+Seluruh kode dirancang terstruktur secara sekuensial di dalam `int main()` menggunakan konsep dasar C++ yang telah diajarkan di kelas:
+
+| No | Nama Lengkap | NIM | Tanggung Jawab & Blok Kode | Materi C++ yang Digunakan |
 |---|---|---|---|---|
-| 1 | **Ahmad Raihan Khomeini Saputra** | `2604130073` | **Ketua Tim & Arsitek Sistem** | Menyusun kerangka program, merancang alur utama (`main()`), menu navigasi, dan manajemen repositori Git. |
-| 2 | **Muhammad Dienan Akbar** | `2604130112` | **Input & Handling Transaksi** | Membuat fungsi input data pelanggan (`cin` nama, pemilihan layanan, dan berat pakaian) dengan validasi data. |
-| 3 | **Aulia Ari Fadhilah** | `2604130139` | **Katalog Tarif & Perhitungan Biaya** | Mengelola representasi Array tarif/layanan, menampilkan daftar tarif, dan menghitung biaya dasar (`berat × tarif`). |
-| 4 | **Salwa Thalita Azahra** | `2604130033` | **Logika Diskon & Total Bayar** | Menerapkan percabangan `if-else` untuk diskon 10% (minimal berat 5 kg) dan menghitung total pembayaran bersih. |
-| 5 | **Muhammad Fakhry Abyan** | `2604130074` | **Tampilan Output & Perulangan** | Mendesain struk/ringkasan transaksi yang rapi di terminal serta logika perulangan program (`do-while` menu). |
-| 6 | **Athaufa Kindi Wiratama** | `2604130114` | **Integrator, QA & Dokumentasi** | Mengintegrasikan seluruh fungsi, menguji skenario edge cases/bug fixing, serta menyusun laporan akhir dan materi presentasi. |
+| 1 | **Ahmad Raihan Khomeini Saputra** | `2604130073` *(Ketua)* | Inisialisasi program, navigasi menu utama, struktur perulangan `do-while`, dan percabangan `switch-case`. | *Looping & Switch-Case* |
+| 2 | **Muhammad Dienan Akbar** | `2604130112` | Blok input transaksi: nama pelanggan (`cin.ignore` + `getline`), pilihan layanan, dan input berat pakaian. | *Input/Output Stream & String* |
+| 3 | **Salwa Thalita Azahra** | `2604130033` | Blok perhitungan biaya laundry, percabangan `if-else` diskon 10% ($\ge 5\text{ kg}$), dan total pembayaran. | *Operator Aritmatika & If-Else* |
+| 4 | **Aulia Ari Fadhilah** | `2604130139` | Deklarasi data katalog tarif & menu lihat tarif layanan menggunakan Array dan perulangan `for`. | *Array 1D & For-Loop* |
+| 5 | **Muhammad Fakhry Abyan** | `2604130074` | Format tampilan struk/ringkasan transaksi kasir yang rapi dan penanganan konfirmasi kembali ke menu (`y/n`). | *Manipulasi Output & Char Logic* |
+| 6 | **Athaufa Kindi Wiratama** | `2604130114` | Blok menu rekap laporan penjualan (menampilkan riwayat dari Array & akumulasi omzet harian) + Laporan & PPT. | *Array 1D, Looping, Testing & QA* |
 
 ---
 
-## 💡 Fitur Utama
+## 💡 Fitur Utama Program
 
-1. **Menu Utama Interaktif**: Navigasi mudah untuk transaksi baru, cek tarif layanan, atau keluar dari program.
-2. **Dua Pilihan Layanan**:
-   - **Reguler**: Rp7.000 / kg
-   - **Ekspres**: Rp10.000 / kg
-3. **Sistem Diskon Otomatis**: Diskon **10%** otomatis aktif apabila cucian mencapai berat minimal **5 kg**.
-4. **Ringkasan Transaksi (Struk Terminal)**: Menampilkan rincian nama pelanggan, jenis layanan, berat, tarif, subtotal, potongan diskon, dan total bayar.
-5. **Perulangan Transaksi**: Pengguna dapat melakukan transaksi berulang tanpa perlu me-restart program.
-
----
-
-## 🛠️ Konsep Pemrograman C++ yang Digunakan
-
-- **Input / Output**: `cin`, `cout`, `getline()`
-- **Tipe Data & Variabel**: `string`, `int`, `double`, `bool`
-- **Operator Aritmatika**: Perkalian, pengurangan, dan persentase diskon
-- **Percabangan (`if-else` & `switch-case`)**: Pengkondisian diskon dan pemilihan menu
-- **Perulangan (`do-while` / `while`)**: Menjaga program tetap aktif sampai user memilih keluar
-- **Array**: Menyimpan data nama layanan dan daftar tarif per kilogram
+1. **Transaksi Laundry Baru (Menu 1)**:
+   - Input nama pelanggan (mendukung nama lengkap berspasi).
+   - Memilih layanan: **Reguler** (Rp7.000/kg) atau **Ekspres** (Rp10.000/kg).
+   - Input berat cucian dalam kilogram.
+   - Diskon otomatis **10%** apabila berat cucian $\ge 5\text{ kg}$.
+   - Menampilkan struk transaksi per pelanggan dan langsung tersimpan ke riwayat kasir.
+2. **Rekap Laporan Penjualan (Menu 2)**:
+   - Menampilkan daftar semua transaksi yang terjadi hari itu (dari Array).
+   - Menghitung total transaksi, total kilogram cucian, dan **total uang kas masuk (omzet harian)**.
+3. **Lihat Tarif Layanan (Menu 3)**:
+   - Menampilkan daftar harga katalog resmi laundry.
+4. **Keluar (Menu 4)**:
+   - Menutup program dengan pesan terima kasih.
 
 ---
 
-## 🚀 Panduan Kompilasi & Menjalankan Program
+## 🛠️ Konsep Pemrograman C++ yang Digunakan (Sesuai Silabus)
 
-Pastikan compiler C++ (seperti MinGW GCC / G++) sudah terpasang di komputer Anda.
+- **Input / Output Stream**: `#include <iostream>`, `cin`, `cout`, `getline()`
+- **Tipe Data & Variabel**: `int`, `double`, `string`, `char`
+- **Operator Aritmatika**: `*`, `-`, `+`, `%`
+- **Percabangan**: `if-else` (diskon & validasi) dan `switch-case` (menu utama)
+- **Perulangan**: `do-while` (menu berulang), `while` (validasi input), dan `for` (rekap & daftar tarif)
+- **Array 1 Dimensi**: Menyimpan data layanan, tarif, serta riwayat transaksi (nama, layanan, berat, total bayar)
 
-### 1. Kompilasi
+---
+
+## 🚀 Panduan Kompilasi & Menjalankan
+
+### Kompilasi
 ```bash
 g++ -o laundream main.cpp
 ```
 
-### 2. Jalankan Program
+### Menjalankan Program
 - **Windows**:
   ```powershell
   .\laundream.exe
@@ -60,27 +66,3 @@ g++ -o laundream main.cpp
   ```bash
   ./laundream
   ```
-
----
-
-## 🌿 Panduan Kolaborasi Git untuk Anggota Tim
-
-Agar pengerjaan tugas bersama tidak saling tumpang tindih (menghindari *merge conflict*), ikuti alur berikut:
-
-1. **Clone repository**:
-   ```bash
-   git clone https://github.com/hanmeini/Laundream.git
-   cd Laundream
-   ```
-2. **Buat branch fitur masing-masing**:
-   ```bash
-   git checkout -b fitur/nama-tugas
-   # Contoh: git checkout -b fitur/input-dienan
-   ```
-3. **Simpan perubahan dan push**:
-   ```bash
-   git add .
-   git commit -m "feat: implementasi fungsi input data pelanggan"
-   git push origin fitur/nama-tugas
-   ```
-4. **Merge ke branch `main`**: Dilakukan atau ditinjau oleh Ketua (Raihan) / Integrator (Athaufa) melalui Pull Request.
