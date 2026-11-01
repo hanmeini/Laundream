@@ -5,6 +5,10 @@
 *.o
 *.obj
 
+# Arsip Master / Kunci Jawaban Ketua (Jangan di-push ke GitHub tim)
+master_solution.cpp
+kunci_jawaban_*.cpp
+
 # Build directories
 build/
 bin/
