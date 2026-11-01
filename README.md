@@ -64,9 +64,9 @@ Seluruh kode dirancang terstruktur secara sekuensial di dalam `int main()` mengg
 
 ## 🚀 Panduan Kompilasi & Menjalankan
 
-### Kompilasi
+### Kompilasi (Gunakan flag `-static` agar mandiri tanpa butuh file DLL eksternal)
 ```bash
-g++ -o laundream main.cpp
+g++ -static -o laundream main.cpp
 ```
 
 ### Menjalankan Program
