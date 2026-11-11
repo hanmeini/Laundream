@@ -77,3 +77,11 @@ g++ -static -o laundream main.cpp
   ```bash
   ./laundream
   ```
+
+---
+
+## 📚 Panduan Kolaborasi Tim & Penggunaan Git
+
+Bagi seluruh anggota kelompok yang ingin mulai mengerjakan tugas fungsinya dan mengunggah kode ke GitHub, silakan baca panduan lengkap dan ramah pemula di file:  
+👉 **[PANDUAN_GIT.md](PANDUAN_GIT.md)** (Berisi cara clone, buat branch, commit, push, hingga pull request tanpa bentrok).
+
