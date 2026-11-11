@@ -80,36 +80,35 @@ g++ -static -o laundream main.cpp
 
 ---
 
-## 📖 PANDUAN PENGGUNAAN GIT UNTUK ANGGOTA TIM
+## 📖 PANDUAN KOLABORASI GIT (METODE FORK & PULL REQUEST)
 
-Panduan praktis langkah-demi-langkah bagi teman-teman kelompok untuk mengambil proyek, mengerjakan fungsi C++, dan mengunggah kode ke GitHub tanpa takut bentrok (*merge conflict*):
-
-### 1. Persiapan Awal di Laptop (Hanya Sekali)
-Pastikan Git sudah terpasang di laptopmu. Cek di terminal/CMD:
-```bash
-git --version
-```
-*(Jika belum ada, download di: [https://git-scm.com/downloads](https://git-scm.com/downloads) dan install seperti biasa).*
-
-Atur nama dan emailmu di Git:
-```bash
-git config --global user.name "Nama Kamu"
-git config --global user.email "emailkamu@gmail.com"
-```
-
-Download proyek ke laptopmu:
-```bash
-git clone https://github.com/hanmeini/Laundream.git
-cd Laundream
-```
+Agar seluruh anggota tim bisa mengunggah kodingan secara mandiri **tanpa terkena error izin (*Permission Denied 403*)**, kita menggunakan metode standar GitHub: **FORK & PULL REQUEST**.
 
 ---
 
-### 2. Buat Branch Baru Sebelum Ngoding (PENTING!)
-> ⚠️ **JANGAN LANGSUNG NGODING DI BRANCH `main`!**  
-> Buatlah cabang (*branch*) sendiri agar kodinganmu terpisah dan aman:
+### 1. Fork Repositori ke Akun Pribadi (WAJIB di Awal)
+1. Buka repositori proyek kita di browser: **[https://github.com/hanmeini/Laundream](https://github.com/hanmeini/Laundream)**
+2. Klik tombol **"Fork"** di pojok kanan atas halaman GitHub, lalu klik **"Create fork"**.
+3. Sekarang kamu sudah memiliki salinan resmi repositori ini di akun GitHub-mu sendiri:  
+   `https://github.com/[username-kamu]/Laundream`
 
-Ketik perintah ini sesuai dengan nama tugasmu:
+---
+
+### 2. Download (Clone) dari Repositori Fork Milikmu Sendiri
+Buka terminal/CMD di laptopmu, lalu clone repositori **hasil fork kamu** (ganti `[username-kamu]` dengan username GitHub aslimu):
+
+```bash
+# Contoh jika Aulia yang clone:
+git clone https://github.com/auliari/Laundream.git
+cd Laundream
+```
+*(⚠️ Jangan clone langsung URL `hanmeini` ya, clone URL milik akunmu sendiri agar kamu punya hak akses penuh untuk push).*
+
+---
+
+### 3. Buat Branch Baru Sebelum Ngoding
+Buat cabang (*branch*) baru sesuai bagian tugasmu:
+
 ```bash
 # Untuk Dienan (Input Transaksi):
 git checkout -b fitur/input-dienan
@@ -129,74 +128,63 @@ git checkout -b fitur/rekap-athaufa
 
 ---
 
-### 3. Cara Mengerjakan Kode di `main.cpp`
+### 4. Cara Mengerjakan Kode di `main.cpp`
 1. Buka folder `Laundream` di **VS Code**.
-2. Buka file **`main.cpp`**, lalu cari nama kamu di bagian komentar **`// TODO [Nama Kamu]`**.
-3. Ketik kodingan fungsimu di area:
-   ```cpp
-   // --- [TULIS KODE FUNGSI DI SINI] ---
-   
-   // ... kodinganmu ...
-   
-   // --- [SELESAI FUNGSI] ---
-   ```
-4. **Perhatian:** Jangan ubah nama fungsi, tipe data parameter, atau fungsi milik teman lain ya!
+2. Buka file **`main.cpp`**, cari nama kamu di komentar **`// TODO [Nama Kamu]`**.
+3. Ketik kodingan fungsimu di area yang disediakan.
+4. Jangan ubah nama fungsi atau fungsi milik teman lain agar tidak bentrok.
 
 ---
 
-### 4. Uji Coba Kodinganmu di Terminal
-Sebelum disimpan ke GitHub, pastikan program bisa dicompile dan tidak ada error:
+### 5. Uji Coba Kodingan di Terminal
+Pastikan kodinganmu bisa dicompile dan tidak error sebelum diupload:
 ```bash
 g++ -static -o laundream main.cpp
 .\laundream.exe
 ```
-Coba jalankan menu yang kamu buat untuk memastikan logikanya sudah berjalan benar.
 
 ---
 
-### 5. Simpan & Kirim Kodingan ke GitHub (Setelah Selesai Ngoding)
-Setelah kodinganmu selesai dan berjalan lancar, ikuti **4 perintah ini secara berurutan** di terminal:
-
+### 6. Simpan & Push ke GitHub Fork Kamu
+Setelah selesai ngoding dan program berjalan lancar:
 ```bash
-# Langkah 5.1: Cek file yang berubah
-git status
-
-# Langkah 5.2: Masukkan perubahan ke antrean
 git add .
-
-# Langkah 5.3: Simpan perubahan dengan pesan catatan
 git commit -m "feat: selesaikan tugas fungsi oleh [Nama Kamu]"
-
-# Langkah 5.4: Kirim (Push) ke GitHub online
 git push origin [nama-branch-kamu]
 ```
-*Contoh untuk Dienan:*  
-`git push origin fitur/input-dienan`
-
-*(Catatan: Jika baru pertama kali push, biasanya akan muncul jendela browser kecil untuk login/authorize ke akun GitHub-mu, cukup klik tombol hijau Setujui).*
-
----
-
-### 6. Beri Tahu Ketua (Pull Request)
-1. Buka browser: **https://github.com/hanmeini/Laundream**
-2. Nanti akan ada tombol hijau bertuliskan **"Compare & pull request"**. Klik tombol itu, lalu klik **"Create pull request"**.
-3. Chat di grup WA:  
-   > *"Raihan, tugasku di branch `[nama-branch]` sudah ku-push ke GitHub ya, tolong di-review dan digabungkan!"*
+*Contoh untuk Aulia:*  
+`git push origin fitur/tarif-aulia`  
+*(Pasti langsung sukses 100% tanpa error 403, karena kamu push ke repo milik akunmu sendiri!)*
 
 ---
 
-### 7. Cara Mengambil Update Terbaru dari Teman
-Jika teman-teman lain sudah selesai dan kodingannya sudah digabung oleh Raihan ke branch `main`, kamu bisa mengambil kodingan terbaru ke laptopmu:
-```bash
-git checkout main
-git pull origin main
-```
+### 7. Kirim Kodingan ke Repo Utama (Buka Pull Request)
+1. Buka repositori fork di akun GitHub-mu di browser (misal: `github.com/[username-kamu]/Laundream`).
+2. Klik tombol **"Contribute"** $\to$ pilih **"Open pull request"**.
+3. Klik tombol hijau **"Create pull request"**.
+4. Beri tahu Raihan (Ketua) di WA:  
+   > *"Raihan, tugasku sudah ku-pull request ya, tolong di-merge ke main!"*
+5. Raihan tinggal klik tombol **"Merge pull request"** di GitHub utama untuk menyatukan kodinganmu.
 
 ---
 
-### 🆘 Solusi Darurat (Kalau Laptop Error Git atau Malas Pakai Terminal)
-Kalau ada kendala teknis dengan instalasi Git di laptop, jangan khawatir:
-1. Buka web: **https://github.com/hanmeini/Laundream**
-2. Klik tombol hijau **`<> Code`** $\to$ pilih **`Download ZIP`**.
-3. Ekstrak di laptop, buka `main.cpp`, dan kerjakan fungsimu.
-4. Kalau sudah beres dan jalan, cukup **copy teks fungsimu saja** lalu kirimkan lewat WhatsApp ke Raihan / Athaufa biar dibantu di-push ke GitHub!
+### 💡 KHUSUS UNTUK YANG SUDAH TERLANJUR NGODING (Seperti Kasus Aulia)
+Bagi yang kodenya sudah diketik dan sudah di-commit di branch lokal tapi gagal push karena error 403:
+1. Buka **https://github.com/hanmeini/Laundream** di browser $\to$ klik **"Fork"**.
+2. Kembali ke terminal VS Code kamu, ketik perintah ini untuk mengubah alamat upload ke repo fork kamu:
+   ```bash
+   # Ganti auliari dengan username GitHub kamu:
+   git remote set-url origin https://github.com/[username-kamu]/Laundream.git
+   ```
+3. Langsung push lagi:
+   ```bash
+   git push origin [nama-branch-kamu]
+   ```
+4. Kodinganmu **tidak akan hilang sama sekali**, langsung ter-upload ke akunmu, dan tinggal ikuti **Langkah 7 (Pull Request)** di atas!
+
+---
+
+### 🆘 Solusi Darurat (Kalau Laptop Error Git)
+1. Buka web GitHub $\to$ klik **`Code` > `Download ZIP`**.
+2. Ekstrak, kerjakan fungsimu di VS Code.
+3. Kirimkan potongan teks fungsimu lewat WhatsApp ke Raihan / Athaufa biar dibantu di-push ke GitHub!
