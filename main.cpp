@@ -41,8 +41,23 @@ void tampilkanKatalogTarif(const vector<string> &layanan,
     cout << "========================================================\n";
 
     // --- [TULIS KODE FUNGSI AULIA DI BAWAH INI] ---
-    cout << "[KOSONG] TODO: Implementasikan perulangan katalog dari vector oleh Aulia.\n";
-    (void)layanan; (void)tarif; (void)parfum; (void)tarifParfum;
+    cout << "\nDAFTAR PAKET LAYANAN:\n";
+    cout << "---------------------\n";
+
+    for (size_t i = 0; i < layanan.size(); ++i) {
+        cout << i + 1 << ". " << layanan[i] << " - Rp" << tarif[i] << "/kg\n";
+    }
+
+    cout << "\nDAFTAR PARFUM:\n";
+    cout << "----------------\n";
+
+    for (size_t i = 0; i < parfum.size(); ++i) {
+        cout << i + 1 << ". " << parfum[i] << " - Rp" << tarifParfum[i] << "/kg\n";
+    }
+
+    cout << "\nCATATAN PROMO:\n";
+    cout << "----------------\n";
+    cout << "Diskon 10% untuk berat cucian minimal 5 kg.\n";
     // --- [SELESAI FUNGSI AULIA] ---
 
     cout << "========================================================\n";
