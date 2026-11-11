@@ -80,8 +80,123 @@ g++ -static -o laundream main.cpp
 
 ---
 
-## 📚 Panduan Kolaborasi Tim & Penggunaan Git
+## 📖 PANDUAN PENGGUNAAN GIT UNTUK ANGGOTA TIM
 
-Bagi seluruh anggota kelompok yang ingin mulai mengerjakan tugas fungsinya dan mengunggah kode ke GitHub, silakan baca panduan lengkap dan ramah pemula di file:  
-👉 **[PANDUAN_GIT.md](PANDUAN_GIT.md)** (Berisi cara clone, buat branch, commit, push, hingga pull request tanpa bentrok).
+Panduan praktis langkah-demi-langkah bagi teman-teman kelompok untuk mengambil proyek, mengerjakan fungsi C++, dan mengunggah kode ke GitHub tanpa takut bentrok (*merge conflict*):
 
+### 1. Persiapan Awal di Laptop (Hanya Sekali)
+Pastikan Git sudah terpasang di laptopmu. Cek di terminal/CMD:
+```bash
+git --version
+```
+*(Jika belum ada, download di: [https://git-scm.com/downloads](https://git-scm.com/downloads) dan install seperti biasa).*
+
+Atur nama dan emailmu di Git:
+```bash
+git config --global user.name "Nama Kamu"
+git config --global user.email "emailkamu@gmail.com"
+```
+
+Download proyek ke laptopmu:
+```bash
+git clone https://github.com/hanmeini/Laundream.git
+cd Laundream
+```
+
+---
+
+### 2. Buat Branch Baru Sebelum Ngoding (PENTING!)
+> ⚠️ **JANGAN LANGSUNG NGODING DI BRANCH `main`!**  
+> Buatlah cabang (*branch*) sendiri agar kodinganmu terpisah dan aman:
+
+Ketik perintah ini sesuai dengan nama tugasmu:
+```bash
+# Untuk Dienan (Input Transaksi):
+git checkout -b fitur/input-dienan
+
+# Untuk Salwa (Diskon & Kasir):
+git checkout -b fitur/diskon-salwa
+
+# Untuk Fakhry (Struk & Cari Pelanggan):
+git checkout -b fitur/struk-search-fakhry
+
+# Untuk Aulia (Katalog Tarif):
+git checkout -b fitur/tarif-aulia
+
+# Untuk Athaufa (Rekap Penjualan & Statistik):
+git checkout -b fitur/rekap-athaufa
+```
+
+---
+
+### 3. Cara Mengerjakan Kode di `main.cpp`
+1. Buka folder `Laundream` di **VS Code**.
+2. Buka file **`main.cpp`**, lalu cari nama kamu di bagian komentar **`// TODO [Nama Kamu]`**.
+3. Ketik kodingan fungsimu di area:
+   ```cpp
+   // --- [TULIS KODE FUNGSI DI SINI] ---
+   
+   // ... kodinganmu ...
+   
+   // --- [SELESAI FUNGSI] ---
+   ```
+4. **Perhatian:** Jangan ubah nama fungsi, tipe data parameter, atau fungsi milik teman lain ya!
+
+---
+
+### 4. Uji Coba Kodinganmu di Terminal
+Sebelum disimpan ke GitHub, pastikan program bisa dicompile dan tidak ada error:
+```bash
+g++ -static -o laundream main.cpp
+.\laundream.exe
+```
+Coba jalankan menu yang kamu buat untuk memastikan logikanya sudah berjalan benar.
+
+---
+
+### 5. Simpan & Kirim Kodingan ke GitHub (Setelah Selesai Ngoding)
+Setelah kodinganmu selesai dan berjalan lancar, ikuti **4 perintah ini secara berurutan** di terminal:
+
+```bash
+# Langkah 5.1: Cek file yang berubah
+git status
+
+# Langkah 5.2: Masukkan perubahan ke antrean
+git add .
+
+# Langkah 5.3: Simpan perubahan dengan pesan catatan
+git commit -m "feat: selesaikan tugas fungsi oleh [Nama Kamu]"
+
+# Langkah 5.4: Kirim (Push) ke GitHub online
+git push origin [nama-branch-kamu]
+```
+*Contoh untuk Dienan:*  
+`git push origin fitur/input-dienan`
+
+*(Catatan: Jika baru pertama kali push, biasanya akan muncul jendela browser kecil untuk login/authorize ke akun GitHub-mu, cukup klik tombol hijau Setujui).*
+
+---
+
+### 6. Beri Tahu Ketua (Pull Request)
+1. Buka browser: **https://github.com/hanmeini/Laundream**
+2. Nanti akan ada tombol hijau bertuliskan **"Compare & pull request"**. Klik tombol itu, lalu klik **"Create pull request"**.
+3. Chat di grup WA:  
+   > *"Raihan, tugasku di branch `[nama-branch]` sudah ku-push ke GitHub ya, tolong di-review dan digabungkan!"*
+
+---
+
+### 7. Cara Mengambil Update Terbaru dari Teman
+Jika teman-teman lain sudah selesai dan kodingannya sudah digabung oleh Raihan ke branch `main`, kamu bisa mengambil kodingan terbaru ke laptopmu:
+```bash
+git checkout main
+git pull origin main
+```
+
+---
+
+### 🆘 Solusi Darurat (Kalau Laptop Error Git atau Malas Pakai Terminal)
+Kalau ada kendala teknis dengan instalasi Git di laptop, jangan khawatir:
+1. Buka web: **https://github.com/hanmeini/Laundream**
+2. Klik tombol hijau **`<> Code`** $\to$ pilih **`Download ZIP`**.
+3. Ekstrak di laptop, buka `main.cpp`, dan kerjakan fungsimu.
+4. Kalau sudah beres dan jalan, cukup **copy teks fungsimu saja** lalu kirimkan lewat WhatsApp ke Raihan / Athaufa biar dibantu di-push ke GitHub!
