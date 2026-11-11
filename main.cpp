@@ -1,5 +1,7 @@
 #include <iostream>
+#include <vector>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -9,75 +11,245 @@ using namespace std;
          LAUNDREAM: SISTEM KASIR & REKAPITULASI BIAYA LAUNDRY
                     FAKULTAS MIPA - UNIVERSITAS NEGERI SEMARANG
 ================================================================================
-Petunjuk untuk Seluruh Anggota Kelompok:
-1. Seluruh kode ditulis murni di dalam fungsi int main() sesuai silabus perkuliahan.
-2. Setiap anggota bertanggung jawab mengimplementasikan bagian kodenya masing-masing
+Petunjuk Teknis untuk Seluruh Anggota Kelompok:
+1. Program dirancang MODULAR berbasis Function (Fungsi) dan Vector C++ STL
+   sesuai materi kuliah Pertemuan 11 (Vector) & Fungsi.
+2. Setiap anggota bertanggung jawab mengimplementasikan fungsinya masing-masing
    pada blok komentar // TODO yang telah disediakan.
-3. Jangan mengubah nama variabel yang sudah disepakati bersama agar kode dapat terhubung
-   dengan lancar.
+3. Jangan mengubah nama fungsi, tipe data return, atau parameter agar kode tim
+   dapat terhubung dan berjalan dengan lancar saat digabungkan.
 ================================================================================
 */
 
+
+// ============================================================================
+// 1. MODUL KATALOG & DAFTAR HARGA
+// Penanggung Jawab: AULIA ARI FADHILAH (2604130139)
+// Konsep C++      : Vector 1D, Looping Traversal, void Function
+// ============================================================================
+// TODO [Aulia]:
+// 1. Buat perulangan for dari i = 0 sampai layanan.size() untuk mencetak
+//    nama paket layanan dan tarifnya per kg.
+// 2. Buat perulangan for kedua untuk menampilkan daftar parfum dan tarif tambahannya.
+// 3. Tampilkan catatan promo diskon 10% untuk berat minimal 5 kg.
+void tampilkanKatalogTarif(const vector<string> &layanan, 
+                           const vector<int> &tarif, 
+                           const vector<string> &parfum, 
+                           const vector<int> &tarifParfum) {
+    cout << "\n========================================================\n";
+    cout << "            DAFTAR TARIF & KATALOG LAUNDRY              \n";
+    cout << "========================================================\n";
+
+    // --- [TULIS KODE FUNGSI AULIA DI BAWAH INI] ---
+    cout << "[KOSONG] TODO: Implementasikan perulangan katalog dari vector oleh Aulia.\n";
+    (void)layanan; (void)tarif; (void)parfum; (void)tarifParfum;
+    // --- [SELESAI FUNGSI AULIA] ---
+
+    cout << "========================================================\n";
+}
+
+
+// ============================================================================
+// 2. MODUL INPUT DATA TRANSAKSI
+// Penanggung Jawab: MUHAMMAD DIENAN AKBAR (2604130112)
+// Konsep C++      : Parameter Reference (&), I/O Stream (getline, cin)
+// ============================================================================
+// TODO [Dienan]:
+// 1. Minta input nama pelanggan menggunakan cin.ignore() dan getline(cin, nama).
+// 2. Tampilkan pilihan paket layanan (1 sampai layanan.size()) dan minta input pilihLayanan.
+//    Lengkapi validasi while agar pilihan tidak di luar jangkauan 1 - layanan.size().
+// 3. Tampilkan pilihan parfum (1 sampai parfum.size()) dan minta input pilihParfum.
+// 4. Minta input berat pakaian (kg) dengan validasi while agar berat > 0.
+void inputDataTransaksi(string &nama, int &pilihLayanan, int &pilihParfum, double &berat,
+                        const vector<string> &layanan, const vector<int> &tarif,
+                        const vector<string> &parfum) {
+    cout << "\n========================================================\n";
+    cout << "                TRANSAKSI LAUNDRY BARU                  \n";
+    cout << "========================================================\n";
+
+    // --- [TULIS KODE FUNGSI DIENAN DI BAWAH INI] ---
+    cout << "[KOSONG] TODO: Implementasikan input nama, layanan, dan berat oleh Dienan.\n";
+    nama = "Contoh Pelanggan";
+    pilihLayanan = 1;
+    pilihParfum = 1;
+    berat = 1.0;
+    (void)layanan; (void)tarif; (void)parfum;
+    // --- [SELESAI FUNGSI DIENAN] ---
+}
+
+
+// ============================================================================
+// 3. MODUL PERHITUNGAN BIAYA, DISKON, DAN KASIR
+// Penanggung Jawab: SALWA THALITA AZAHRA (2604130033)
+// Konsep C++      : Function Return Value, Percabangan if-else & Operator Aritmatika
+// ============================================================================
+// TODO [Salwa - Bagian A]:
+// Kembalikan nilai subtotal * 0.10 jika berat >= 5.0 kg, selain itu kembalikan 0.0.
+double hitungDiskon(double berat, double subtotal) {
+    // --- [TULIS KODE RUMUS DISKON DI SINI] ---
+    if (berat >= 5.0) {
+        return subtotal * 0.10;
+    }
+    return 0.0;
+}
+
+// TODO [Salwa - Bagian B]:
+// 1. Tampilkan nominal total tagihan (totalBayar).
+// 2. Minta input uang tunai kasir (uangBayar).
+// 3. Buat perulangan while jika uangBayar < totalBayar (uang kurang).
+// 4. Hitung uang kembalian: kembalian = uangBayar - totalBayar.
+// 5. Kembalikan nilai kembalian.
+int prosesPembayaranKasir(int totalBayar, int &uangBayar, int &kembalian) {
+    // --- [TULIS KODE PEMBAYARAN KASIR DI SINI] ---
+    cout << "[KOSONG] TODO: Implementasikan logika kasir & kembalian oleh Salwa.\n";
+    uangBayar = totalBayar;
+    kembalian = 0;
+    return kembalian;
+}
+
+
+// ============================================================================
+// 4A. MODUL CETAK STRUK KASIR
+// Penanggung Jawab: MUHAMMAD FAKHRY ABYAN (2604130074)
+// Konsep C++      : Function void, Manipulasi Output Terminal
+// ============================================================================
+// TODO [Fakhry - Bagian A]:
+// Desain tampilan struk kasir resmi yang rapi dengan pembatas '=' dan '-'.
+// Tampilkan Nama, Layanan, Parfum, Berat, Tarif/kg, Subtotal, Diskon,
+// Total Bayar, Uang Diterima, dan Uang Kembalian.
+void cetakStrukKasir(const string &nama, const string &layanan, const string &parfum,
+                     double berat, int tarifPerKg, double subtotal, double diskon,
+                     int totalBayar, int uangBayar, int kembalian) {
+    cout << "\n========================================================\n";
+    cout << "             STRUK RESMI TRANSAKSI LAUNDREAM            \n";
+    cout << "========================================================\n";
+
+    // --- [TULIS KODE DESAIN STRUK DI SINI] ---
+    cout << "[KOSONG] TODO: Desain tampilan struk kasir oleh Fakhry.\n";
+    (void)nama; (void)layanan; (void)parfum; (void)berat; (void)tarifPerKg;
+    (void)subtotal; (void)diskon; (void)totalBayar; (void)uangBayar; (void)kembalian;
+    // --- [SELESAI STRUK] ---
+
+    cout << "========================================================\n";
+}
+
+
+// ============================================================================
+// 4B. MODUL PENCARIAN TRANSAKSI (MENGGUNAKAN find() & distance() DARI <algorithm>)
+// Penanggung Jawab: MUHAMMAD FAKHRY ABYAN (2604130074)
+// Konsep C++      : STL Algorithm find(), Iterator, dan distance() (Slide 7 Vector)
+// ============================================================================
+// TODO [Fakhry - Bagian B]:
+// 1. Periksa apakah riwayatNama.empty() (Slide 5 Vector). Jika iya, beri pesan kosong.
+// 2. Minta input nama yang dicari (cariNama) menggunakan getline.
+// 3. Terapkan fungsi find():
+//    auto it = find(riwayatNama.begin(), riwayatNama.end(), cariNama);
+// 4. Periksa if (it != riwayatNama.end()):
+//    - Ambil indeksnya: int idx = distance(riwayatNama.begin(), it);
+//    - Cetak rincian cucian pada indeks [idx] tersebut.
+// 5. Jika tidak cocok (else), tampilkan pesan bahwa pelanggan tidak ditemukan.
+void cariTransaksiPelanggan(const vector<string> &riwayatNama,
+                            const vector<string> &riwayatLayanan,
+                            const vector<string> &riwayatParfum,
+                            const vector<double> &riwayatBerat,
+                            const vector<int> &riwayatTotalBayar,
+                            const vector<int> &riwayatUangBayar,
+                            const vector<int> &riwayatKembalian) {
+    cout << "\n========================================================\n";
+    cout << "          PENCARIAN RIWAYAT TRANSAKSI PELANGGAN         \n";
+    cout << "========================================================\n";
+
+    // --- [TULIS KODE PENCARIAN DENGAN find() DI SINI] ---
+    cout << "[KOSONG] TODO: Implementasikan pencarian dengan find() oleh Fakhry.\n";
+    (void)riwayatNama; (void)riwayatLayanan; (void)riwayatParfum; (void)riwayatBerat;
+    (void)riwayatTotalBayar; (void)riwayatUangBayar; (void)riwayatKembalian;
+    // --- [SELESAI PENCARIAN] ---
+}
+
+
+// ============================================================================
+// 5. MODUL REKAPITULASI PENJUALAN & STATISTIK KASIR
+// Penanggung Jawab: ATHAUFA KINDI WIRATAMA (2604130114)
+// Konsep C++      : Vector .empty(), .size(), Traversal & Algoritma Nilai Maksimum
+// ============================================================================
+// TODO [Athaufa]:
+// 1. Cek if (riwayatNama.empty()), jika kosong tampilkan pesan belum ada data.
+// 2. Jika ada data:
+//    - Gunakan loop for (size_t i = 0; i < riwayatNama.size(); i++) untuk
+//      mencetak tabel seluruh transaksi.
+//    - Tampilkan ringkasan: Total Transaksi, Total Berat (kg), Rata-rata Berat,
+//      dan Total Omzet Uang Masuk.
+// 3. Algoritma Nilai Maksimum (Mencari Transaksi Terbesar):
+//    - Inisialisasi: int bayarTerbesar = riwayatTotalBayar[0]; size_t idxTerbesar = 0;
+//    - Gunakan loop for dari 1 sampai riwayatTotalBayar.size():
+//      if (riwayatTotalBayar[i] > bayarTerbesar) { bayarTerbesar = riwayatTotalBayar[i]; idxTerbesar = i; }
+//    - Tampilkan nama pelanggan dan nominal transaksi terbesar tersebut.
+void tampilkanRekapPenjualan(const vector<string> &riwayatNama,
+                             const vector<string> &riwayatLayanan,
+                             const vector<string> &riwayatParfum,
+                             const vector<double> &riwayatBerat,
+                             const vector<int> &riwayatTotalBayar,
+                             int totalOmzet, double totalKg) {
+    cout << "\n======================================================================\n";
+    cout << "               REKAP LAPORAN PENJUALAN LAUNDREAM                      \n";
+    cout << "======================================================================\n";
+
+    // --- [TULIS KODE REKAP LAPORAN & NILAI MAKSIMUM DI SINI] ---
+    cout << "[KOSONG] TODO: Implementasikan rekap penjualan & nilai maksimum oleh Athaufa.\n";
+    (void)riwayatNama; (void)riwayatLayanan; (void)riwayatParfum; (void)riwayatBerat;
+    (void)riwayatTotalBayar; (void)totalOmzet; (void)totalKg;
+    // --- [SELESAI REKAP] ---
+
+    cout << "======================================================================\n";
+}
+
+
+// ============================================================================
+// 6. MODUL MENU UTAMA & INTEGRASI PROGRAM
+// Penanggung Jawab: AHMAD RAIHAN KHOMEINI SAPUTRA (2604130073) - Ketua
+// Konsep C++      : void Function, do-while Loop, switch-case & Pemanggilan Fungsi
+// ============================================================================
+void tampilkanMenuUtama() {
+    cout << "\n========================================================\n";
+    cout << "                 LAUNDREAM - MENU UTAMA                 \n";
+    cout << "========================================================\n";
+    cout << "1. Transaksi Laundry Baru (Kasir & Kembalian)\n";
+    cout << "2. Cari Riwayat Transaksi Pelanggan (find() Vector)\n";
+    cout << "3. Rekap Laporan Penjualan & Statistik Kasir\n";
+    cout << "4. Lihat Daftar Tarif & Layanan\n";
+    cout << "5. Keluar\n";
+    cout << "========================================================\n";
+    cout << "Pilih menu (1-5): ";
+}
+
 int main() {
-    // ========================================================================
-    // BLOK 1: DEKLARASI DATA KATALOG & ARRAY RIWAYAT TRANSAKSI
-    // Penanggung Jawab: AULIA ARI FADHILAH (2604130139)
-    // Konsep C++      : Array 1 Dimensi & Variabel Dasar
-    // ========================================================================
-    // TODO [Aulia]:
-    // 1. Deklarasikan array untuk nama paket layanan (4 paket):
-    //    - "Cuci Kering Lipat", "Cuci Kering Setrika", "Setrika Saja", "Paket Ekspres (1 Hari)"
-    // 2. Deklarasikan array untuk tarif masing-masing paket layanan:
-    //    - 6000, 8000, 5000, 12000
-    // 3. Deklarasikan array untuk opsi parfum/pewangi (2 opsi) beserta tarif tambahannya:
-    //    - "Parfum Standar" (Rp0) dan "Parfum Premium" (Rp2000/kg)
-    // 4. Deklarasikan array penampung riwayat transaksi (kapasitas 50):
-    //    - string riwayatNama[50];
-    //    - string riwayatLayanan[50];
-    //    - string riwayatParfum[50];
-    //    - double riwayatBerat[50];
-    //    - int riwayatTotalBayar[50];
-    //    - int riwayatUangBayar[50];
-    //    - int riwayatKembalian[50];
-    // 5. Deklarasikan variabel akumulasi rekap:
-    //    - int jumlahTransaksi = 0;
-    //    - int totalPendapatan = 0;
-    //    - double totalKgLaundry = 0.0;
-    
-    // --- [MULAI KODING BLOK 1 DI SINI] ---
-    const int JUMLAH_LAYANAN = 4;
-    string namaLayanan[JUMLAH_LAYANAN] = {
+    // Inisialisasi Vector Katalog Layanan & Parfum
+    vector<string> namaLayanan = {
         "Cuci Kering Lipat",
         "Cuci Kering Setrika",
         "Setrika Saja",
         "Paket Ekspres (1 Hari)"
     };
-    int tarifLayanan[JUMLAH_LAYANAN] = {6000, 8000, 5000, 12000};
+    vector<int> tarifLayanan = {6000, 8000, 5000, 12000};
 
-    const int JUMLAH_PARFUM = 2;
-    string namaParfum[JUMLAH_PARFUM] = {"Parfum Standar", "Parfum Premium (+Rp2.000/kg)"};
-    int tarifParfum[JUMLAH_PARFUM] = {0, 2000};
+    vector<string> namaParfum = {
+        "Parfum Standar",
+        "Parfum Premium (+Rp2.000/kg)"
+    };
+    vector<int> tarifParfum = {0, 2000};
 
-    const int MAX_TRANSAKSI = 50;
-    string riwayatNama[MAX_TRANSAKSI];
-    string riwayatLayanan[MAX_TRANSAKSI];
-    string riwayatParfum[MAX_TRANSAKSI];
-    double riwayatBerat[MAX_TRANSAKSI];
-    int riwayatTotalBayar[MAX_TRANSAKSI];
-    int riwayatUangBayar[MAX_TRANSAKSI];
-    int riwayatKembalian[MAX_TRANSAKSI];
+    // Vector Dinamis Riwayat Transaksi (Bertambah otomatis via .push_back())
+    vector<string> riwayatNama;
+    vector<string> riwayatLayanan;
+    vector<string> riwayatParfum;
+    vector<double> riwayatBerat;
+    vector<int> riwayatTotalBayar;
+    vector<int> riwayatUangBayar;
+    vector<int> riwayatKembalian;
 
-    int jumlahTransaksi = 0;
-    int totalPendapatan = 0;
+    int totalOmzet = 0;
     double totalKgLaundry = 0.0;
-    // --- [SELESAI BLOK 1] ---
 
-
-    // ========================================================================
-    // BLOK 2: MENU UTAMA & PERULANGAN PROGRAM UTAMA
-    // Penanggung Jawab: AHMAD RAIHAN KHOMEINI SAPUTRA (2604130073) - Ketua
-    // Konsep C++      : Perulangan do-while & Percabangan switch-case
-    // ========================================================================
     int pilihanMenu = 0;
     char lanjutMenu = 'y';
 
@@ -86,192 +258,91 @@ int main() {
     cout << "  Sistem Kasir & Rekapitulasi Laundry Berbasis C++     \n";
     cout << "========================================================\n";
 
-    // TODO [Raihan]:
-    // 1. Buat perulangan do-while agar menu dapat terus berjalan berulang kali.
-    // 2. Tampilkan teks Menu Utama (1 sampai 5).
-    // 3. Minta input pilihanMenu dari user.
-    // 4. Buat struktur percabangan switch (pilihanMenu) untuk memanggil case 1 - 5.
-
     do {
-        cout << "\n========================================================\n";
-        cout << "                 LAUNDREAM - MENU UTAMA                 \n";
-        cout << "========================================================\n";
-        cout << "1. Transaksi Laundry Baru (Kasir & Kembalian)\n";
-        cout << "2. Cari Riwayat Transaksi Pelanggan (Linear Search)\n";
-        cout << "3. Rekap Laporan Penjualan & Statistik Kasir\n";
-        cout << "4. Lihat Daftar Tarif & Layanan\n";
-        cout << "5. Keluar\n";
-        cout << "========================================================\n";
-        cout << "Pilih menu (1-5): ";
+        tampilkanMenuUtama();
         cin >> pilihanMenu;
 
         switch (pilihanMenu) {
             case 1: {
-                // ============================================================
-                // BLOK 3: INPUT DATA TRANSAKSI & PILIHAN LAYANAN
-                // Penanggung Jawab: MUHAMMAD DIENAN AKBAR (2604130112)
-                // Konsep C++      : Input/Output (cin, getline) & Validasi Looping
-                // ============================================================
-                cout << "\n========================================================\n";
-                cout << "                TRANSAKSI LAUNDRY BARU                  \n";
-                cout << "========================================================\n";
-
                 string namaPelanggan;
-                int pilihanLayanan = 0;
-                int pilihanParfum = 0;
+                int pilihLayanan = 0;
+                int pilihParfum = 0;
                 double beratPakaian = 0.0;
 
-                // TODO [Dienan]:
-                // 1. Minta input nama pelanggan menggunakan cin.ignore() dan getline(cin, namaPelanggan).
-                // 2. Tampilkan daftar 4 jenis paket layanan menggunakan perulangan for.
-                // 3. Minta input pilihanLayanan (1-4), lengkapi dengan while jika input < 1 atau > 4.
-                // 4. Tampilkan opsi parfum (1-2) dan minta input pilihanParfum.
-                // 5. Minta input beratPakaian (kg), lengkapi dengan while agar berat harus > 0.
-                
-                // --- [TULIS KODE BLOK 3 DI BAWAH INI] ---
-                cout << "[KOSONG] TODO: Kerjakan input nama, layanan, parfum, dan berat oleh Dienan.\n";
-                // --- [SELESAI BLOK 3] ---
+                // 1. Panggil Modul Input (Dienan)
+                inputDataTransaksi(namaPelanggan, pilihLayanan, pilihParfum, beratPakaian,
+                                   namaLayanan, tarifLayanan, namaParfum);
 
+                int idxLayanan = pilihLayanan - 1;
+                int idxParfum = pilihParfum - 1;
 
-                // ============================================================
-                // BLOK 4: PERHITUNGAN BIAYA, DISKON 10% & UANG KEMBALIAN
-                // Penanggung Jawab: SALWA THALITA AZAHRA (2604130033)
-                // Konsep C++      : Operator Aritmatika & Percabangan if-else
-                // ============================================================
-                // TODO [Salwa]:
-                // 1. Tentukan indeks layanan dan tarif efektif:
-                //    - totalTarifPerKg = tarifLayanan[idxLayanan] + tarifParfum[idxParfum]
-                // 2. Hitung biayaKotor = beratPakaian * totalTarifPerKg
-                // 3. Buat percabangan if-else untuk diskon 10%:
-                //    - if (beratPakaian >= 5.0) diskon = biayaKotor * 0.10; else diskon = 0.0;
-                // 4. Hitung totalBayar = biayaKotor - diskon
-                // 5. Minta input uang tunai kasir (uangBayar) dan buat perulangan while jika uang kurang.
-                // 6. Hitung kembalian = uangBayar - totalBayar
-                // 7. Simpan data transaksi ini ke dalam Array riwayat pada indeks [jumlahTransaksi],
-                //    kemudian lakukan increment jumlahTransaksi++, tambahkan ke totalPendapatan,
-                //    dan tambahkan ke totalKgLaundry.
-                
-                // --- [TULIS KODE BLOK 4 DI BAWAH INI] ---
-                int totalBayar = 0;
+                string layananTerpilih = namaLayanan[idxLayanan];
+                string parfumTerpilih = (idxParfum == 0) ? "Standar" : "Premium";
+
+                int tarifDasar = tarifLayanan[idxLayanan];
+                int tarifTambahan = tarifParfum[idxParfum];
+                int totalTarifPerKg = tarifDasar + tarifTambahan;
+
+                // 2. Panggil Modul Perhitungan & Kasir (Salwa)
+                double subtotal = beratPakaian * totalTarifPerKg;
+                double diskon = hitungDiskon(beratPakaian, subtotal);
+                int totalBayar = static_cast<int>(subtotal - diskon);
+
                 int uangBayar = 0;
                 int kembalian = 0;
-                cout << "[KOSONG] TODO: Kerjakan logika hitung biaya, if-else diskon, dan kembalian oleh Salwa.\n";
-                // --- [SELESAI BLOK 4] ---
+                prosesPembayaranKasir(totalBayar, uangBayar, kembalian);
 
+                // 3. Simpan ke Vector Riwayat menggunakan .push_back()
+                riwayatNama.push_back(namaPelanggan);
+                riwayatLayanan.push_back(layananTerpilih);
+                riwayatParfum.push_back(parfumTerpilih);
+                riwayatBerat.push_back(beratPakaian);
+                riwayatTotalBayar.push_back(totalBayar);
+                riwayatUangBayar.push_back(uangBayar);
+                riwayatKembalian.push_back(kembalian);
 
-                // ============================================================
-                // BLOK 5A: FORMAT TAMPILAN STRUK RESMI KASIR
-                // Penanggung Jawab: MUHAMMAD FAKHRY ABYAN (2604130074)
-                // Konsep C++      : Manipulasi Tampilan Output (cout)
-                // ============================================================
-                // TODO [Fakhry]:
-                // 1. Cetak struk rincian kasir resmi yang rapi dengan pembatas tanda '=' dan '-'.
-                // 2. Tampilkan Nama, Layanan, Parfum, Berat, Tarif/kg, Subtotal, Diskon,
-                //    Total Bayar, Uang Diterima, dan Uang Kembalian.
-                // 3. Tanyakan konfirmasi kepada kasir: "Kembali ke menu utama? (y/n): "
-                //    lalu simpan ke variabel lanjutMenu.
-                
-                // --- [TULIS KODE BLOK 5A DI BAWAH INI] ---
-                cout << "[KOSONG] TODO: Desain tampilan struk kasir oleh Fakhry.\n";
+                totalOmzet += totalBayar;
+                totalKgLaundry += beratPakaian;
+
+                // 4. Cetak Struk Resmi (Fakhry)
+                cetakStrukKasir(namaPelanggan, layananTerpilih, parfumTerpilih,
+                                beratPakaian, totalTarifPerKg, subtotal, diskon,
+                                totalBayar, uangBayar, kembalian);
+
                 cout << "\nKembali ke menu utama? (y/n): ";
                 cin >> lanjutMenu;
-                // --- [SELESAI BLOK 5A] ---
-
                 break;
             }
 
             case 2: {
-                // ============================================================
-                // BLOK 5B: FITUR PENCARIAN TRANSAKSI (LINEAR SEARCH PADA ARRAY)
-                // Penanggung Jawab: MUHAMMAD FAKHRY ABYAN (2604130074)
-                // Konsep C++      : Algoritma Pencarian Sekuensial (Linear Search)
-                // ============================================================
-                cout << "\n========================================================\n";
-                cout << "          PENCARIAN RIWAYAT TRANSAKSI PELANGGAN         \n";
-                cout << "========================================================\n";
-
-                // TODO [Fakhry]:
-                // 1. Cek apakah jumlahTransaksi == 0. Jika iya, tampilkan bahwa belum ada transaksi.
-                // 2. Jika ada, minta input cariNama menggunakan cin.ignore() dan getline(cin, cariNama).
-                // 3. Buat variabel boolean: bool ditemukan = false;
-                // 4. Gunakan perulangan for (int i = 0; i < jumlahTransaksi; i++):
-                //    - Periksa: if (riwayatNama[i] == cariNama)
-                //    - Jika cocok, ubah ditemukan = true dan cetak rincian cucian pelanggan tersebut.
-                // 5. Jika setelah loop ditemukan == false, beri pesan data tidak ditemukan.
-                // 6. Minta input lanjutMenu ('y' atau 'n').
-
-                // --- [TULIS KODE BLOK 5B DI BAWAH INI] ---
-                cout << "[KOSONG] TODO: Kerjakan pencarian linear search pada array oleh Fakhry.\n";
+                // Panggil Modul Cari Pelanggan dengan find() (Fakhry)
+                cariTransaksiPelanggan(riwayatNama, riwayatLayanan, riwayatParfum,
+                                       riwayatBerat, riwayatTotalBayar,
+                                       riwayatUangBayar, riwayatKembalian);
                 cout << "\nKembali ke menu utama? (y/n): ";
                 cin >> lanjutMenu;
-                // --- [SELESAI BLOK 5B] ---
-
                 break;
             }
 
             case 3: {
-                // ============================================================
-                // BLOK 6: REKAP LAPORAN PENJUALAN & STATISTIK TRANSAKSI TERBESAR
-                // Penanggung Jawab: ATHAUFA KINDI WIRATAMA (2604130114)
-                // Konsep C++      : Pembacaan Array & Algoritma Nilai Maksimum
-                // ============================================================
-                cout << "\n======================================================================\n";
-                cout << "               REKAP LAPORAN PENJUALAN LAUNDREAM                      \n";
-                cout << "======================================================================\n";
-
-                // TODO [Athaufa]:
-                // 1. Cek apakah jumlahTransaksi == 0. Jika iya, tampilkan belum ada transaksi.
-                // 2. Jika ada data:
-                //    - Gunakan perulangan for untuk mencetak tabel seluruh transaksi dari array:
-                //      riwayatNama[i], riwayatLayanan[i], riwayatBerat[i], riwayatTotalBayar[i].
-                //    - Tampilkan ringkasan: Total Transaksi, Total Berat (kg), Rata-rata Berat,
-                //      dan Total Omzet Pemasukan (totalPendapatan).
-                // 3. Algoritma Mencari Transaksi Terbesar (Nilai Maksimum):
-                //    - Inisialisasi: int bayarTerbesar = riwayatTotalBayar[0]; int idxTerbesar = 0;
-                //    - Gunakan loop for (int i = 1; i < jumlahTransaksi; i++):
-                //      if (riwayatTotalBayar[i] > bayarTerbesar) {
-                //          bayarTerbesar = riwayatTotalBayar[i];
-                //          idxTerbesar = i;
-                //      }
-                //    - Cetak statistik transaksi terbesar dan nama pelanggannya.
-                // 4. Minta input lanjutMenu ('y' atau 'n').
-
-                // --- [TULIS KODE BLOK 6 DI BAWAH INI] ---
-                cout << "[KOSONG] TODO: Kerjakan rekap laporan, omzet, dan nilai maksimum oleh Athaufa.\n";
+                // Panggil Modul Rekap Penjualan & Statistik (Athaufa)
+                tampilkanRekapPenjualan(riwayatNama, riwayatLayanan, riwayatParfum,
+                                        riwayatBerat, riwayatTotalBayar,
+                                        totalOmzet, totalKgLaundry);
                 cout << "\nKembali ke menu utama? (y/n): ";
                 cin >> lanjutMenu;
-                // --- [SELESAI BLOK 6] ---
-
                 break;
             }
 
             case 4: {
-                // ============================================================
-                // BLOK 7: TAMPILAN DAFTAR TARIF & KATALOG LAYANAN
-                // Penanggung Jawab: AULIA ARI FADHILAH (2604130139)
-                // Konsep C++      : Pembacaan Array dengan Perulangan for
-                // ============================================================
-                cout << "\n========================================================\n";
-                cout << "            DAFTAR TARIF & KATALOG LAUNDRY              \n";
-                cout << "========================================================\n";
-
-                // TODO [Aulia]:
-                // 1. Gunakan perulangan for untuk menampilkan isi array namaLayanan dan tarifLayanan.
-                // 2. Tampilkan pula opsi pewangi dari array namaParfum dan tarifParfum.
-                // 3. Beri catatan promo diskon 10% untuk berat cucian minimal 5 kg.
-                // 4. Minta input lanjutMenu ('y' atau 'n').
-
-                // --- [TULIS KODE BLOK 7 DI BAWAH INI] ---
-                cout << "[KOSONG] TODO: Tampilkan katalog harga dari array oleh Aulia.\n";
+                // Panggil Modul Katalog Tarif (Aulia)
+                tampilkanKatalogTarif(namaLayanan, tarifLayanan, namaParfum, tarifParfum);
                 cout << "\nKembali ke menu utama? (y/n): ";
                 cin >> lanjutMenu;
-                // --- [SELESAI BLOK 7] ---
-
                 break;
             }
 
             case 5: {
-                // Keluar dari program
                 cout << "\n========================================================\n";
                 cout << "   Terima kasih telah menggunakan aplikasi Laundream!   \n";
                 cout << "                 Sampai jumpa kembali!                  \n";
@@ -282,7 +353,7 @@ int main() {
 
             default: {
                 cout << "\n[!] Pilihan tidak valid. Silakan pilih nomor 1 sampai 5.\n";
-                cout << "Tekan tombol karakter apa saja lalu enter untuk kembali...";
+                cout << "Tekan tombol karakter apa saja lalu enter...";
                 char temp;
                 cin >> temp;
                 lanjutMenu = 'y';
