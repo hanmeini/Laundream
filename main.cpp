@@ -97,28 +97,37 @@ void inputDataTransaksi(string &nama, int &pilihLayanan, int &pilihParfum, doubl
 // 3. MODUL PERHITUNGAN BIAYA, DISKON, DAN KASIR
 // Penanggung Jawab: SALWA THALITA AZAHRA (2604130033)
 // Konsep C++      : Function Return Value, Percabangan if-else & Operator Aritmatika
-// ============================================================================
-// TODO [Salwa - Bagian A]:
-// Kembalikan nilai subtotal * 0.10 jika berat >= 5.0 kg, selain itu kembalikan 0.0.
+// ============================================================================ 
+// Bagian A: Diskon 10% jika berat >= 5.0 kg, selain itu 0.0
 double hitungDiskon(double berat, double subtotal) {
-    // --- [TULIS KODE RUMUS DISKON DI SINI] ---
     if (berat >= 5.0) {
         return subtotal * 0.10;
     }
     return 0.0;
 }
 
-// TODO [Salwa - Bagian B]:
-// 1. Tampilkan nominal total tagihan (totalBayar).
-// 2. Minta input uang tunai kasir (uangBayar).
-// 3. Buat perulangan while jika uangBayar < totalBayar (uang kurang).
-// 4. Hitung uang kembalian: kembalian = uangBayar - totalBayar.
-// 5. Kembalikan nilai kembalian.
+int bacaUang() {
+    int nilai;
+    while (!(cin >> nilai) || nilai < 0) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "[!] Input tidak valid. Masukkan angka : Rp ";
+    }
+    return nilai;
+}
+
 int prosesPembayaranKasir(int totalBayar, int &uangBayar, int &kembalian) {
-    // --- [TULIS KODE PEMBAYARAN KASIR DI SINI] ---
-    cout << "[KOSONG] TODO: Implementasikan logika kasir & kembalian oleh Salwa.\n";
-    uangBayar = totalBayar;
-    kembalian = 0;
+    cout << "\nTotal Tagihan : Rp " << totalBayar << endl;
+    cout << "Uang Bayar    : Rp ";
+    uangBayar = bacaUang();
+
+    while (uangBayar < totalBayar) {
+        cout << "[!] Uang kurang Rp " << (totalBayar - uangBayar) << endl;
+        cout << "Masukkan ulang uang bayar : Rp ";
+        uangBayar = bacaUang();
+    }
+
+    kembalian = uangBayar - totalBayar;
     return kembalian;
 }
 
