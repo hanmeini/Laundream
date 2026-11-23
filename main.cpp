@@ -3,6 +3,7 @@
 #include <string>
 #include <algorithm>
 #include <limits>
+#include <iomanip>
 
 using namespace std;
 
@@ -294,9 +295,57 @@ void tampilkanRekapPenjualan(const vector<string> &riwayatNama,
     cout << "======================================================================\n";
 
     // --- [TULIS KODE REKAP LAPORAN & NILAI MAKSIMUM DI SINI] ---
-    cout << "[KOSONG] TODO: Implementasikan rekap penjualan & nilai maksimum oleh Athaufa.\n";
-    (void)riwayatNama; (void)riwayatLayanan; (void)riwayatParfum; (void)riwayatBerat;
-    (void)riwayatTotalBayar; (void)totalOmzet; (void)totalKg;
+    if (riwayatNama.empty()) {
+        cout << "[!] Belum ada transaksi penjualan yang tersimpan.\n";
+        cout << "======================================================================\n";
+        return;
+    }
+
+    cout << "\nDAFTAR SEMUA TRANSAKSI\n";
+    cout << "----------------------------------------------------------------------\n";
+    cout << left << setw(5) << "No"
+         << setw(22) << "Nama Pelanggan"
+         << setw(22) << "Layanan"
+         << setw(14) << "Parfum"
+         << setw(10) << "Berat"
+         << setw(14) << "Total Bayar" << "\n";
+    cout << "----------------------------------------------------------------------\n";
+
+    cout << fixed << setprecision(2);
+    for (size_t i = 0; i < riwayatNama.size(); i++) {
+        cout << left << setw(5) << i + 1
+             << setw(22) << riwayatNama[i]
+             << setw(22) << riwayatLayanan[i]
+             << setw(14) << riwayatParfum[i]
+             << setw(10) << riwayatBerat[i]
+             << " kg   Rp " << setw(10) << riwayatTotalBayar[i] << "\n";
+    }
+    cout << "----------------------------------------------------------------------\n";
+
+    double rataRataBerat = totalKg / static_cast<double>(riwayatNama.size());
+
+    cout << "\nRINGKASAN PENJUALAN\n";
+    cout << "--------------------------------------------------------\n";
+    cout << "Total Transaksi   : " << riwayatNama.size() << " transaksi\n";
+    cout << "Total Berat       : " << setprecision(2) << totalKg << " kg\n";
+    cout << "Rata-rata Berat   : " << setprecision(2) << rataRataBerat << " kg\n";
+    cout << "Total Omzet       : Rp " << totalOmzet << "\n";
+
+    int bayarTerbesar = riwayatTotalBayar[0];
+    size_t idxTerbesar = 0;
+
+    for (size_t i = 1; i < riwayatTotalBayar.size(); i++) {
+        if (riwayatTotalBayar[i] > bayarTerbesar) {
+            bayarTerbesar = riwayatTotalBayar[i];
+            idxTerbesar = i;
+        }
+    }
+
+    cout << "\nTRANSAKSI TERBESAR\n";
+    cout << "--------------------------------------------------------\n";
+    cout << "Nama Pelanggan    : " << riwayatNama[idxTerbesar] << "\n";
+    cout << "Nominal Transaksi : Rp " << bayarTerbesar << "\n";
+    cout << "Layanan           : " << riwayatLayanan[idxTerbesar] << "\n";
     // --- [SELESAI REKAP] ---
 
     cout << "======================================================================\n";
